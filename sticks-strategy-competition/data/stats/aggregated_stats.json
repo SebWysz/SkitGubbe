@@ -1,0 +1,36 @@
+{
+  "strategies": {
+    "random_strategy": {
+      "eats": 2745.833333333333,
+      "games": 428,
+      "kills": 506.6666666666667,
+      "losses": 133,
+      "positions_sum": 754,
+      "wars": 233.0
+    },
+    "random_strategy2": {
+      "eats": 2745.833333333333,
+      "games": 428,
+      "kills": 506.6666666666667,
+      "losses": 124,
+      "positions_sum": 668,
+      "wars": 233.0
+    },
+    "random_strategy3": {
+      "eats": 2745.833333333333,
+      "games": 428,
+      "kills": 506.6666666666667,
+      "losses": 118,
+      "positions_sum": 678,
+      "wars": 233.0
+    },
+    "simple_strategy": {
+      "eats": 2601.5,
+      "games": 396,
+      "kills": 403.0,
+      "losses": 53,
+      "positions_sum": 372,
+      "wars": 206.0
+    }
+  }
+}

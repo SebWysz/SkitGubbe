@@ -1,0 +1,6 @@
+Flask==2.0.1
+Werkzeug==2.3.8
+numpy==1.26.4
+pytest==6.2.4
+singlestoredb
+python-dotenv==1.0.1
