@@ -67,7 +67,7 @@ def run_single_game(strat_wrappers, goat_index=0, config: GameConfig | None = No
 
 
 def main():  # pragma: no cover
-    strategies_dir = Path(__file__).parent.parent.parent / "strategies" / "skit"
+    strategies_dir = Path(__file__).parent.parent / "strategies"
     wrappers = load_strategies(strategies_dir)
     assert len(wrappers) >= 3, "Need at least 3 strategies"
     res = run_single_game(wrappers, goat_index=0)

@@ -4,7 +4,7 @@ from engine.part1 import Part1Engine
 
 
 def test_part1_runs_and_collects_cards():
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers = load_strategies(strat_dir)
     assert len(wrappers) >= 3
     p1 = Part1Engine(wrappers, goat_index=0, time_limit_ms=100)

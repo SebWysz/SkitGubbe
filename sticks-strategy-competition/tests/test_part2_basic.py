@@ -5,7 +5,7 @@ from engine.state import GameConfig
 
 
 def test_part2_progress_metrics():
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers = load_strategies(strat_dir)
     assert len(wrappers) >= 3
     res = run_single_game(wrappers, goat_index=0, config=GameConfig(time_limit_ms=100))

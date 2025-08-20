@@ -4,7 +4,7 @@ from engine.tournament import run_tournament, TournamentConfig
 
 
 def test_tournament_runs_and_collects_stats():
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers = load_strategies(strat_dir)
     cfg = TournamentConfig(games=5, random_seed=99, time_limit_ms=40)
     results = run_tournament(wrappers, cfg)

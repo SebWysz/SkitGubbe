@@ -7,7 +7,7 @@ from engine.state import GameConfig
 
 
 def test_part2_infinite_loop_safeguard_not_triggered():
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers = load_strategies(strat_dir)
     p1 = Part1Engine(wrappers, goat_index=0, time_limit_ms=50)
     collected, last_winner, trump_card, wars = p1.run()
@@ -45,7 +45,7 @@ def test_part2_illegal_duplicate_indices():
     from engine.state import StrategyWrapper
     wrappers = [StrategyWrapper(name='Dup', module_name='dup_mod', instance=DupStrategy()),]
     # add one normal strategy to allow game progress
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers.extend(load_strategies(strat_dir)[:2])
     p1 = Part1Engine(wrappers, goat_index=0, time_limit_ms=50)
     collected, last_winner, trump_card, wars = p1.run()

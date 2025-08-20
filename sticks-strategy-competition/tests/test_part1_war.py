@@ -39,7 +39,7 @@ def make_wrappers(n):
     # dynamically create n wrappers of HighTie plus one random to break endless ties
     base = [StrategyWrapper(name=f"HighTie{i}", module_name="__inline_high_tie__", instance=HighTieStrategy(), memory={}) for i in range(n)]
     # load one existing random strategy for variety
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     existing = load_strategies(strat_dir)
     base.append(existing[0])
     return base

@@ -208,7 +208,7 @@ def get_repo() -> SingleStoreStatsRepo | None:
         return None
     # Ensure scheme is present; if missing, assume singlestoredb:// and warn
     if '://' not in uri:
-        print('[singlestore_repo] Warning: SINGLESTORE_URI missing scheme, prepending singlestoredb://')
+        # print('[singlestore_repo] Warning: SINGLESTORE_URI missing scheme, prepending singlestoredb://')
         uri = 'singlestoredb://' + uri
     uri = uri.strip()
     try:

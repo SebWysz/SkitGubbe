@@ -5,7 +5,7 @@ from engine.state import GameConfig
 
 
 def test_replay_summaries_and_beat_reasons():
-    strat_dir = Path('sticks-strategy-competition/strategies')
+    strat_dir = Path('strategies')
     wrappers = load_strategies(strat_dir)
     config = GameConfig(time_limit_ms=80, enable_replay=True, random_seed=1234)
     res = run_single_game(wrappers, goat_index=0, config=config)
