@@ -3,6 +3,8 @@ Skitgubbe Strategy Competition Workspace
 
 Primary project code lives in `sticks-strategy-competition/` (engine, strategies, tests, dashboard).
 
+Based off of a combination of the SingleStore way of playing and https://cs.brown.edu/people/jhughes/trivia/skitgubbe.html.
+
 Quick Start
 -----------
 Clone repo & create a virtual environment (Python 3.10+ recommended), then install deps:
