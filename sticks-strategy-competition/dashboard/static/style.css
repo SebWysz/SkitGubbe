@@ -20,6 +20,10 @@
   --table-head-border:#31424d;
   --table-head-text:#f5f9fc;
   --table-head-accent:#61dafb;
+  --tab-bg: #1a2530;
+  --tab-hover-bg: #243140;
+  --tab-active-bg: #2d4050;
+  --tab-border: #3a4a5a;
 }
 
 body.theme-bg {
@@ -31,26 +35,133 @@ body.theme-bg {
 
 .gradient-header {
   background: linear-gradient(90deg,#17242b,#1f3038,#2a4047);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo-icon {font-size:1.3rem;}
+.logo-icon {
+  font-size:1.3rem;
+  text-shadow: 0 0 10px rgba(255, 179, 71, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(255, 179, 71, 0.5); }
+  to { text-shadow: 0 0 20px rgba(255, 179, 71, 0.8), 0 0 30px rgba(255, 179, 71, 0.3); }
+}
 
 .metric-card {
-  background: var(--metric-bg);
+  background: linear-gradient(135deg, var(--metric-bg), #2a3a45);
   border:1px solid var(--metric-border);
-  border-radius: 12px;
-  padding: .9rem 1.1rem;
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
   min-width: 160px;
-  box-shadow: 0 4px 8px -4px rgba(0,0,0,.4);
+  box-shadow: 0 8px 16px -6px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.metric-value { font-weight:600; font-size:1.15rem; }
-.metric-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; opacity:.8; }
 
-.card { background:#1d2630; border-color:#2c3a45; }
-.card-header { background:rgba(255,255,255,0.03); border-bottom:1px solid #2f3d48; color:#fff; }
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.metric-value { 
+  font-weight:700; 
+  font-size:1.25rem; 
+  background: linear-gradient(45deg, #61dafb, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.metric-label { 
+  font-size:.75rem; 
+  text-transform:uppercase; 
+  letter-spacing:.08em; 
+  opacity:.8; 
+  margin-top: 0.25rem;
+}
+
+.card { 
+  background: linear-gradient(135deg, #1d2630, #243040); 
+  border: 1px solid #2c3a45; 
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+.card-header { 
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); 
+  border-bottom:1px solid #2f3d48; 
+  color:#fff; 
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* Enhanced Tab Styling */
+.nav-tabs {
+  border: none;
+  padding: 0.5rem 1rem 0;
+  background: transparent;
+}
+
+.nav-tabs .nav-link {
+  background: var(--tab-bg);
+  border: 1px solid var(--tab-border);
+  border-bottom: none;
+  color: #b0bcc7;
+  border-radius: 12px 12px 0 0;
+  padding: 0.75rem 1.25rem;
+  margin-right: 0.25rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-tabs .nav-link:hover {
+  background: var(--tab-hover-bg);
+  color: #e0eaf0;
+  border-color: #4a5a6a;
+  transform: translateY(-1px);
+}
+
+.nav-tabs .nav-link.active {
+  background: linear-gradient(135deg, var(--tab-active-bg), #35455a);
+  color: #ffffff;
+  border-color: #4a5a6a;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+}
+
+.nav-tabs .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #61dafb);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-tabs .nav-link.active::before {
+  transform: scaleX(1);
+}
+
+.tab-icon {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+.strategy-name {
+  background: linear-gradient(45deg, #e0eaf0, #b0bcc7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600 !important;
+}
 .table { color:#d9e4ea; }
 .table thead th { 
-  background: var(--table-head-bg);
+  background: linear-gradient(135deg, var(--table-head-bg), #1a2730);
   border-bottom:2px solid var(--table-head-border);
   font-size:.70rem;
   letter-spacing:.08em;
@@ -58,25 +169,97 @@ body.theme-bg {
   font-weight:600;
   color:var(--table-head-text);
   position:sticky; top:0; z-index:5;
-  text-shadow:0 0 2px rgba(0,0,0,0.4);
+  text-shadow:0 1px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-.table thead th.sortable:hover { color: var(--table-head-accent); }
-.table-hover tbody tr:hover { background:rgba(255,255,255,0.05); }
+.table thead th.sortable:hover { 
+  color: var(--table-head-accent); 
+  background: linear-gradient(135deg, #1a2a35, var(--table-head-bg));
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+.table-hover tbody tr:hover { 
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); 
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
 
-.row-rank.rank-1 { background: linear-gradient(90deg, rgba(255,207,51,0.12), rgba(255,207,51,0.02)); }
-.row-rank.rank-2 { background: linear-gradient(90deg, rgba(192,201,214,0.12), rgba(192,201,214,0.02)); }
-.row-rank.rank-3 { background: linear-gradient(90deg, rgba(201,122,67,0.12), rgba(201,122,67,0.02)); }
+.row-rank.rank-1 { 
+  background: linear-gradient(90deg, rgba(255,207,51,0.15), rgba(255,207,51,0.03)); 
+  border-left: 3px solid var(--gold);
+}
+.row-rank.rank-2 { 
+  background: linear-gradient(90deg, rgba(192,201,214,0.15), rgba(192,201,214,0.03)); 
+  border-left: 3px solid var(--silver);
+}
+.row-rank.rank-3 { 
+  background: linear-gradient(90deg, rgba(201,122,67,0.15), rgba(201,122,67,0.03)); 
+  border-left: 3px solid var(--bronze);
+}
 
-.medal { font-size:1.1rem; }
+.medal { 
+  font-size:1.2rem; 
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
 
-.pill { display:inline-block; padding:.25rem .55rem; border-radius: 999px; font-size:.65rem; font-weight:600; letter-spacing:.05em; }
-.pill-good { background:rgba(15,173,112,0.15); color:var(--good); border:1px solid rgba(15,173,112,0.4); }
-.pill-mid { background:rgba(255,179,71,0.15); color:var(--mid); border:1px solid rgba(255,179,71,0.4); }
-.pill-bad { background:rgba(217,83,79,0.18); color:var(--bad); border:1px solid rgba(217,83,79,0.45); }
+@keyframes subtle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
 
-.highlight-card { background:var(--highlight-bg); border:1px solid var(--metric-border); border-radius:10px; padding:.9rem 1rem; font-size:.9rem; box-shadow:0 4px 10px -4px rgba(0,0,0,0.55); }
+.pill { 
+  display:inline-block; 
+  padding:.3rem .7rem; 
+  border-radius: 20px; 
+  font-size:.65rem; 
+  font-weight:600; 
+  letter-spacing:.05em; 
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+.pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.pill-good { 
+  background: linear-gradient(135deg, rgba(15,173,112,0.2), rgba(15,173,112,0.1)); 
+  color:var(--good); 
+  border:1px solid rgba(15,173,112,0.5); 
+}
+.pill-mid { 
+  background: linear-gradient(135deg, rgba(255,179,71,0.2), rgba(255,179,71,0.1)); 
+  color:var(--mid); 
+  border:1px solid rgba(255,179,71,0.5); 
+}
+.pill-bad { 
+  background: linear-gradient(135deg, rgba(217,83,79,0.25), rgba(217,83,79,0.1)); 
+  color:var(--bad); 
+  border:1px solid rgba(217,83,79,0.5); 
+}
 
-.badge.text-bg-dark-subtle { background:#2c3a45 !important; color:#b7c4cc !important; }
+.highlight-card { 
+  background: linear-gradient(135deg, var(--highlight-bg), #1f2d38); 
+  border:1px solid var(--metric-border); 
+  border-radius:12px; 
+  padding:1rem 1.1rem; 
+  font-size:.9rem; 
+  box-shadow:0 6px 12px -4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05); 
+  transition: transform 0.2s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.badge.text-bg-dark-subtle { 
+  background: linear-gradient(135deg, #2c3a45, #3a4a55) !important; 
+  color:#b7c4cc !important; 
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 
 th.sortable { position:relative; }
 th.sortable:after { content:'\25B4'; position:absolute; right:4px; top:50%; transform:translateY(-55%) scale(.65); opacity:.3; }

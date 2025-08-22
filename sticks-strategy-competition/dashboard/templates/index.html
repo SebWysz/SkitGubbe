@@ -26,31 +26,125 @@
   <main class="container-fluid px-3 px-md-4 pb-5">
     <div id="aggregate" class="row g-3 mb-4"></div>
 
+    <!-- Navigation tabs for different leaderboards -->
     <div class="card border-0 shadow-sm mb-4">
-      <div class="card-header d-flex flex-wrap align-items-center gap-3 py-2">
-        <h2 class="h5 mb-0 fw-semibold">Leaderboard</h2>
-        <div class="ms-auto d-flex flex-column align-items-end gap-1">
+      <div class="card-header py-0">
+        <ul class="nav nav-tabs card-header-tabs" id="leaderboardTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overall-tab" data-bs-toggle="tab" data-bs-target="#overall-pane" type="button" role="tab" aria-controls="overall-pane" aria-selected="true">
+              <span class="tab-icon">🏆</span> Overall
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="p3-tab" data-bs-toggle="tab" data-bs-target="#p3-pane" type="button" role="tab" aria-controls="p3-pane" aria-selected="false">
+              <span class="tab-icon">👥</span> 3-Player
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="p4-tab" data-bs-toggle="tab" data-bs-target="#p4-pane" type="button" role="tab" aria-controls="p4-pane" aria-selected="false">
+              <span class="tab-icon">👥</span> 4-Player
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="p5-tab" data-bs-toggle="tab" data-bs-target="#p5-pane" type="button" role="tab" aria-controls="p5-pane" aria-selected="false">
+              <span class="tab-icon">👥</span> 5-Player
+            </button>
+          </li>
+        </ul>
+        <div class="ms-auto d-flex flex-column align-items-end gap-1 position-absolute" style="top: 0.5rem; right: 1rem;">
           <div class="small text-muted" id="gamesSummary"></div>
           <div class="small"><span id="dataSource" class="badge bg-secondary">—</span></div>
         </div>
       </div>
-      <div class="table-responsive rounded-bottom">
-        <table class="table table-hover align-middle mb-0" id="leaderboardTable">
-          <thead>
-            <tr>
-              <th scope="col" class="sortable" data-key="rank">#</th>
-              <th scope="col" class="sortable" data-key="strategy">Strategy</th>
-              <th scope="col" class="sortable" data-key="games">Games</th>
-              <th scope="col" class="sortable" data-key="losses">Losses</th>
-              <th scope="col" class="sortable" data-key="loss_rate">Loss Rate</th>
-              <th scope="col" class="sortable" data-key="avg_finish_position">Avg Finish</th>
-              <th scope="col" class="sortable" data-key="avg_wars">Wars</th>
-              <th scope="col" class="sortable" data-key="avg_kills">Kills</th>
-              <th scope="col" class="sortable" data-key="avg_eats">Eats</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      
+      <div class="tab-content" id="leaderboardTabContent">
+        <!-- Overall Leaderboard -->
+        <div class="tab-pane fade show active" id="overall-pane" role="tabpanel" aria-labelledby="overall-tab">
+          <div class="table-responsive rounded-bottom">
+            <table class="table table-hover align-middle mb-0" id="leaderboardTable">
+              <thead>
+                <tr>
+                  <th scope="col" class="sortable" data-key="rank">#</th>
+                  <th scope="col" class="sortable" data-key="strategy">Strategy</th>
+                  <th scope="col" class="sortable" data-key="games">Games</th>
+                  <th scope="col" class="sortable" data-key="losses">Losses</th>
+                  <th scope="col" class="sortable" data-key="loss_rate">Loss Rate</th>
+                  <th scope="col" class="sortable" data-key="avg_finish_position">Avg Finish</th>
+                  <th scope="col" class="sortable" data-key="avg_wars">Wars</th>
+                  <th scope="col" class="sortable" data-key="avg_kills">Kills</th>
+                  <th scope="col" class="sortable" data-key="avg_eats">Eats</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- 3-Player Leaderboard -->
+        <div class="tab-pane fade" id="p3-pane" role="tabpanel" aria-labelledby="p3-tab">
+          <div class="table-responsive rounded-bottom">
+            <table class="table table-hover align-middle mb-0" id="p3Table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Strategy</th>
+                  <th scope="col">Games</th>
+                  <th scope="col">Losses</th>
+                  <th scope="col">Loss Rate</th>
+                  <th scope="col">Avg Finish</th>
+                  <th scope="col">Wars</th>
+                  <th scope="col">Kills</th>
+                  <th scope="col">Eats</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- 4-Player Leaderboard -->
+        <div class="tab-pane fade" id="p4-pane" role="tabpanel" aria-labelledby="p4-tab">
+          <div class="table-responsive rounded-bottom">
+            <table class="table table-hover align-middle mb-0" id="p4Table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Strategy</th>
+                  <th scope="col">Games</th>
+                  <th scope="col">Losses</th>
+                  <th scope="col">Loss Rate</th>
+                  <th scope="col">Avg Finish</th>
+                  <th scope="col">Wars</th>
+                  <th scope="col">Kills</th>
+                  <th scope="col">Eats</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- 5-Player Leaderboard -->
+        <div class="tab-pane fade" id="p5-pane" role="tabpanel" aria-labelledby="p5-tab">
+          <div class="table-responsive rounded-bottom">
+            <table class="table table-hover align-middle mb-0" id="p5Table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Strategy</th>
+                  <th scope="col">Games</th>
+                  <th scope="col">Losses</th>
+                  <th scope="col">Loss Rate</th>
+                  <th scope="col">Avg Finish</th>
+                  <th scope="col">Wars</th>
+                  <th scope="col">Kills</th>
+                  <th scope="col">Eats</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -78,8 +172,9 @@
     Skitgubbe Strategy Competition • <span id="footerGames"></span>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  const state = { data: [], sortKey: null, sortDir: 1 };
+  const state = { data: [], segmented: {}, recent: [], sortKey: null, sortDir: 1 };
 
   function fmtPct(v){return (v*100).toFixed(1)+'%'}
   function clsLoss(v){return v < 0.25 ? 'good' : (v > 0.55 ? 'bad' : 'mid');}
@@ -108,17 +203,18 @@
   }
 
   async function fetchStats(){
-  const res = await fetch('/stats');
+    const res = await fetch('/stats');
     if(!res.ok) return;
     const payload = await res.json();
-  state.data = payload.leaderboard || [];
-  state.recent = payload.recent_games || [];
-  const sourceEl = document.getElementById('dataSource');
-  if(payload.source==='db') {sourceEl.textContent='DB'; sourceEl.className='badge bg-success';}
-  else if(payload.source==='file') {sourceEl.textContent='FILE'; sourceEl.className='badge bg-warning text-dark';}
-  else if(payload.source==='db_unavailable') {sourceEl.textContent='DB DOWN'; sourceEl.className='badge bg-danger';}
-  // Preserve baseline rank (payload already sorted by canonical rules on server)
-  state.data.forEach((row,i)=> row.rank = i+1);
+    state.data = payload.leaderboard || [];
+    state.segmented = payload.segmented || {};
+    state.recent = payload.recent_games || [];
+    const sourceEl = document.getElementById('dataSource');
+    if(payload.source==='db') {sourceEl.textContent='DB'; sourceEl.className='badge bg-success';}
+    else if(payload.source==='file') {sourceEl.textContent='FILE'; sourceEl.className='badge bg-warning text-dark';}
+    else if(payload.source==='db_unavailable') {sourceEl.textContent='DB DOWN'; sourceEl.className='badge bg-danger';}
+    // Preserve baseline rank (payload already sorted by canonical rules on server)
+    state.data.forEach((row,i)=> row.rank = i+1);
     if(!state.sortKey){
       // Default: keep canonical rank order ascending without triggering toggle logic
       state.sortKey='rank';
@@ -126,8 +222,9 @@
       // Data already in ascending rank order (payload order). Just render.
       renderTable();
     } else {renderTable();}
+    renderSegmentedTables();
     renderAggregate();
-  renderRecent();
+    renderRecent();
     document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
   }
 
@@ -142,19 +239,52 @@
       else if(row.rank===3) tr.classList.add('rank-3');
       tr.innerHTML=`
         <td class="text-center align-middle">${decorateMedal(row.rank) || row.rank}</td>
-        <th scope="row" class="fw-semibold">${row.strategy}</th>
+        <th scope="row" class="fw-semibold strategy-name">${row.strategy || row.name}</th>
         <td>${row.games}</td>
         <td>${row.losses}</td>
         <td><span class="pill pill-${clsLoss(row.loss_rate)}">${fmtPct(row.loss_rate)}</span></td>
-        <td>${row.avg_finish_position.toFixed(2)}</td>
-        <td>${row.avg_wars.toFixed(2)}</td>
-        <td>${row.avg_kills.toFixed(2)}</td>
-        <td>${row.avg_eats.toFixed(2)}</td>`;
+        <td>${(row.avg_finish_position || 0).toFixed(2)}</td>
+        <td>${(row.avg_wars || 0).toFixed(2)}</td>
+        <td>${(row.avg_kills || 0).toFixed(2)}</td>
+        <td>${(row.avg_eats || 0).toFixed(2)}</td>`;
       tbody.appendChild(tr);
     });
     document.getElementById('gamesSummary').textContent = state.data.length ? `${totalGames()} total games (aggregate)` : '';
     document.getElementById('footerGames').textContent = state.data.length ? `${totalGames()} games aggregated` : 'no games yet';
     renderCallouts();
+  }
+
+  function renderSegmentedTables(){
+    ['p3', 'p4', 'p5'].forEach(playerCount => {
+      const data = state.segmented[playerCount] || [];
+      const tbody = document.querySelector(`#${playerCount}Table tbody`);
+      tbody.innerHTML='';
+      
+      if(data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-4">No games played with this player count yet</td></tr>';
+        return;
+      }
+      
+      data.forEach((row, index)=>{
+        const rank = index + 1;
+        const tr = document.createElement('tr');
+        tr.classList.add('row-rank');
+        if(rank===1) tr.classList.add('rank-1');
+        else if(rank===2) tr.classList.add('rank-2');
+        else if(rank===3) tr.classList.add('rank-3');
+        tr.innerHTML=`
+          <td class="text-center align-middle">${decorateMedal(rank) || rank}</td>
+          <th scope="row" class="fw-semibold strategy-name">${row.strategy || row.name}</th>
+          <td>${row.games}</td>
+          <td>${row.losses}</td>
+          <td><span class="pill pill-${clsLoss(row.loss_rate)}">${fmtPct(row.loss_rate)}</span></td>
+          <td>${(row.avg_finish_position || 0).toFixed(2)}</td>
+          <td>${(row.avg_wars || 0).toFixed(2)}</td>
+          <td>${(row.avg_kills || 0).toFixed(2)}</td>
+          <td>${(row.avg_eats || 0).toFixed(2)}</td>`;
+        tbody.appendChild(tr);
+      });
+    });
   }
 
   function totalGames(){

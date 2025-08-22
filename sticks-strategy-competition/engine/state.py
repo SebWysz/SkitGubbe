@@ -61,6 +61,8 @@ class GameConfig:
     enable_replay: bool = True
     # optional cap on stored events to prevent unbounded memory in pathological games
     max_replay_events: int = 10000
+    # Optional maximum players per game (if wrappers list larger, a subset will be sampled)
+    max_players_per_game: int | None = None
 
 
 @dataclass

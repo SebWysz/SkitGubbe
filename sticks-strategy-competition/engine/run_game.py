@@ -4,6 +4,7 @@ from .loader import load_strategies
 from .part1 import Part1Engine
 from .part2 import Part2Engine
 from .state import GameConfig
+import random
 from .file_stats import record_game as record_game_file
 from .singlestore_repo import get_repo as get_ss_repo
 
@@ -11,8 +12,15 @@ from .singlestore_repo import get_repo as get_ss_repo
 def run_single_game(strat_wrappers, goat_index=0, config: GameConfig | None = None):
     if config is None:
         config = GameConfig()
+    # Apply optional max player cap
+    working_wrappers = list(strat_wrappers)
+    if config.max_players_per_game is not None and len(working_wrappers) > config.max_players_per_game:
+        rng = random.Random(config.random_seed)
+        working_wrappers = rng.sample(working_wrappers, config.max_players_per_game)
+        # Adjust goat_index to within sampled set: choose first sampled as goat
+        goat_index = 0
     p1 = Part1Engine(
-        strat_wrappers,
+        working_wrappers,
         goat_index,
         time_limit_ms=config.time_limit_ms,
         random_seed=config.random_seed,
@@ -23,7 +31,7 @@ def run_single_game(strat_wrappers, goat_index=0, config: GameConfig | None = No
     trump = trump_card.suit if trump_card else None
     leader = last_trick_winner if last_trick_winner is not None else goat_index
     p2 = Part2Engine(
-        strat_wrappers,
+        working_wrappers,
         collected,
         leader,
         trump,
@@ -34,12 +42,13 @@ def run_single_game(strat_wrappers, goat_index=0, config: GameConfig | None = No
     )
     loser, order_out, kills, eats = p2.run()
     result = {
-        "loser": strat_wrappers[loser].name,
+        "loser": working_wrappers[loser].name,
         "trump": trump.name if trump else None,
         "wars": wars,
         "kills": kills,
         "eats": eats,
-        "order_out": [strat_wrappers[i].name for i in order_out],
+        "order_out": [working_wrappers[i].name for i in order_out],
+        "player_count": len(working_wrappers),
     }
     if config.enable_replay:
         result["replay_part1"] = p1.replay

@@ -41,9 +41,14 @@ def record_game(result: dict):
     order = result['order_out'] + [result['loser']]
     wars = result.get('wars', 0); kills = result.get('kills', 0); eats = result.get('eats', 0)
     n = len(order) if order else 1
+    pc = result.get('player_count', n)
+    bucket = f"p{pc}" if pc in (3,4,5) else f"p{pc}"
     with _lock:
         data = _load()
         strat_map = data.setdefault('strategies', {})
+        # segmented stats per player count
+        seg_map = data.setdefault('by_player_count', {})
+        bucket_map = seg_map.setdefault(bucket, {})
         for pos, name in enumerate(order):
             rec = strat_map.setdefault(name, {"games": 0, "losses": 0, "positions_sum": 0, "wars": 0.0, "kills": 0.0, "eats": 0.0})
             rec['games'] += 1
@@ -53,6 +58,15 @@ def record_game(result: dict):
             rec['eats'] += eats / n
             if pos == n - 1:
                 rec['losses'] += 1
+            # segmented
+            seg = bucket_map.setdefault(name, {"games": 0, "losses": 0, "positions_sum": 0, "wars": 0.0, "kills": 0.0, "eats": 0.0})
+            seg['games'] += 1
+            seg['positions_sum'] += pos
+            seg['wars'] += wars / n
+            seg['kills'] += kills / n
+            seg['eats'] += eats / n
+            if pos == n - 1:
+                seg['losses'] += 1
         _save(data)
 
 def load_leaderboard() -> list[dict]:
@@ -73,3 +87,26 @@ def load_leaderboard() -> list[dict]:
         })
     lb.sort(key=lambda x: (x['loss_rate'], x['avg_finish_position']))
     return lb
+
+def load_segmented_leaderboards() -> dict:
+    with _lock:
+        data = _load()
+    seg_root = data.get('by_player_count', {})
+    out: dict = {}
+    for bucket, strat_map in seg_root.items():
+        lb = []
+        for name, rec in strat_map.items():
+            games = rec.get('games', 1) or 1
+            lb.append({
+                'strategy': name,
+                'games': rec.get('games', 0),
+                'losses': rec.get('losses', 0),
+                'loss_rate': rec.get('losses', 0)/games,
+                'avg_finish_position': rec.get('positions_sum', 0)/games,
+                'avg_wars': rec.get('wars', 0.0)/games,
+                'avg_kills': rec.get('kills', 0.0)/games,
+                'avg_eats': rec.get('eats', 0.0)/games,
+            })
+        lb.sort(key=lambda x: (x['loss_rate'], x['avg_finish_position']))
+        out[bucket] = lb
+    return out
